@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App | Joshua Karamuzi</title>
+    
+    <!-- Bootstrap 5 + Icons + AOS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="icon" href="../assets/images/favicon.ico">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; }
+        
+        :root {
+            --dark-green: #0B3B2F;
+            --light-green: #1B5E4A;
+            --mint: #E8F3F0;
+            --gray: #6c757d;
+            --shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        
+        /* Navigation */
+        .navbar {
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        .navbar.scrolled { padding: 0.7rem 0; }
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--dark-green) !important;
+        }
+        .nav-link {
+            font-weight: 500;
+            margin: 0 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover { color: var(--dark-green) !important; transform: translateY(-2px); }
+        
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--dark-green) 0%, var(--light-green) 100%);
+            padding: 120px 0 60px;
+            text-align: center;
+        }
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: white;
+        }
+        .project-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            color: white;
+            margin-top: 1rem;
+        }
+        
+        /* Content */
+        .case-study { padding: 60px 0; }
+        .back-link {
+            color: var(--dark-green);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        .back-link:hover { transform: translateX(-5px); display: inline-block; }
+        
+        .section-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+        .section-card:hover { box-shadow: 0 20px 40px rgba(0,0,0,0.08); transform: translateY(-3px); }
+        .section-card h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-green);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .section-card p { color: var(--gray); line-height: 1.7; }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        .feature-list li {
+            padding: 0.5rem 0 0.5rem 1.5rem;
+            position: relative;
+            color: var(--gray);
+        }
+        .feature-list li:before {
+            content: "✓";
+            color: var(--dark-green);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+        .tech-stack span {
+            background: var(--mint);
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--dark-green);
+            transition: all 0.3s ease;
+        }
+        .tech-stack span:hover {
+            background: var(--dark-green);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .github-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--dark-green);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .github-btn:hover {
+            background: var(--light-green);
+            transform: translateY(-3px);
+            color: white;
+        }
+        
+        .project-image {
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .project-image img { width: 100%; height: auto; }
+        
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .social-links a:hover { color: var(--light-green); transform: translateY(-3px); display: inline-block; }
+        
+        @media (max-width: 768px) {
+            .page-header h1 { font-size: 2rem; }
+            .section-card { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">JK</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.html#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Real-Time Chat Application</h1>
+            <div class="project-badge">
+                <i class="bi bi-code-slash"></i> Full-Stack Developer | 2025
+            </div>
+        </div>
+    </section>
+
+    <!-- Content -->
+    <main class="case-study">
+        <div class="container">
+            <a href="../index.html#projects" class="back-link">
+                <i class="bi bi-arrow-left"></i> Back to Projects
+            </a>
+            
+            <div class="project-image" data-aos="fade-up">
+                <img src="../assets/images/project2.jpg" alt="Chat App Screenshot">
+            </div>
+            
+            <div class="section-card" data-aos="fade-up">
+                <h2><i class="bi bi-exclamation-triangle"></i> The Problem</h2>
+                <p>Real-time communication tools are often bloated, complex, or require expensive subscriptions. Users need a simple, fast, and reliable way to communicate in real-time without unnecessary overhead.</p>
+            </div>
+            
+            <div class="section-card" data-aos="fade-up" data-aos-delay="100">
+                <h2><i class="bi bi-lightbulb"></i> The Solution</h2>
+                <p>A lightweight chat application with user authentication, persistent chat rooms, and real-time message delivery using WebSockets. Simple, fast, and no page refreshes.</p>
+            </div>
+            
+            <div class="section-card" data-aos="fade-up" data-aos-delay="200">
+                <h2><i class="bi bi-check-circle"></i> Key Features</h2>
+                <ul class="feature-list">
+                    <li>User registration and authentication</li>
+                    <li>Multiple chat rooms</li>
+                    <li>Real-time message updates</li>
+                    <li>Message history persistence</li>
+                    <li>User presence indicators</li>
+                </ul>
+            </div>
+            
+            <div class="section-card" data-aos="fade-up" data-aos-delay="300">
+                <h2><i class="bi bi-stack"></i> Tech Stack</h2>
+                <div class="tech-stack">
+                    <span>JavaScript</span>
+                    <span>Node.js</span>
+                    <span>Socket.io</span>
+                    <span>Express</span>
+                    <span>MongoDB</span>
+                </div>
+            </div>
+            
+            <div class="section-card" data-aos="fade-up" data-aos-delay="400">
+                <h2><i class="bi bi-mortarboard"></i> What I Learned</h2>
+                <p>Building this project taught me asynchronous programming, WebSocket protocols, real-time state management, and JWT authentication. It challenged my understanding of client-server communication and made me a better developer.</p>
+            </div>
+            
+            <div class="text-center" data-aos="fade-up" data-aos-delay="500">
+                <a href="https://github.com/joshuaka12/chatAPP" target="_blank" class="github-btn">
+                    <i class="bi bi-github"></i> View Code on GitHub
+                    <i class="bi bi-box-arrow-up-right"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://github.com/joshuaka12" target="_blank"><i class="bi bi-github"></i> GitHub</a>
+                <a href="https://linkedin.com/in/joshuakaramuzi" target="_blank"><i class="bi bi-linkedin"></i> LinkedIn</a>
+                <a href="mailto:karamuzijoshua@gmail.com"><i class="bi bi-envelope"></i> Email</a>
+            </div>
+            <p>&copy; 2026 Joshua Karamuzi. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true, offset: 100 });
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
+        });
+    </script>
+</body>
+</html>

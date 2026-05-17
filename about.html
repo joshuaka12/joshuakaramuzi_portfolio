@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me | Joshua Karamuzi - IT Graduate & Tech Leader</title>
+    
+    <!-- Bootstrap 5 CSS + Icons + Animation Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    
+    <!-- Keep original CSS files for structure compatibility -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" href="assets/images/favicon.ico">
+    
+    <style>
+        /* Dark Green & White Theme - Consistent with Homepage */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            overflow-x: hidden;
+        }
+
+        /* Dark Green Color Scheme */
+        :root {
+            --dark-green: #0B3B2F;
+            --light-green: #1B5E4A;
+            --accent-green: #2E7D64;
+            --mint: #E8F3F0;
+            --white: #ffffff;
+            --gray-light: #f8f9fa;
+            --gray: #6c757d;
+            --shadow-sm: 0 10px 30px rgba(0,0,0,0.05);
+            --shadow-md: 0 20px 40px rgba(0,0,0,0.08);
+            --shadow-lg: 0 30px 60px rgba(0,0,0,0.12);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--mint);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--dark-green);
+            border-radius: 10px;
+        }
+
+        /* Navigation - Same as Homepage */
+        .navbar {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        .navbar.scrolled {
+            padding: 0.7rem 0;
+            box-shadow: var(--shadow-md);
+        }
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--dark-green) !important;
+            letter-spacing: -0.5px;
+            transition: transform 0.3s ease;
+        }
+        .navbar-brand:hover {
+            transform: scale(1.05);
+        }
+        .nav-link {
+            font-weight: 500;
+            color: #333 !important;
+            margin: 0 0.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: var(--dark-green);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 80%;
+        }
+        .nav-link:hover {
+            color: var(--dark-green) !important;
+            transform: translateY(-2px);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--dark-green) 0%, var(--light-green) 100%);
+            padding: 120px 0 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.05)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+            opacity: 0.3;
+        }
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            background: transparent;
+            padding: 0;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb-item a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .breadcrumb-item a:hover {
+            color: white;
+        }
+        .breadcrumb-item.active {
+            color: white;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 80px 0;
+            background: white;
+        }
+        .about-image-wrapper {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transition: transform 0.5s ease;
+        }
+        .about-image-wrapper:hover {
+            transform: scale(1.02);
+        }
+        .about-image-wrapper img {
+            width: 100%;
+            height: auto;
+        }
+        .about-badge {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: var(--dark-green);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--dark-green);
+            margin-bottom: 1rem;
+        }
+        .section-divider {
+            width: 60px;
+            height: 4px;
+            background: var(--dark-green);
+            margin: 1rem 0 1.5rem;
+            border-radius: 2px;
+        }
+        .about-text {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        .signature {
+            font-family: 'Inter', cursive;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--dark-green);
+            margin-top: 1rem;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 60px 0;
+            background: var(--gray-light);
+        }
+        .stat-box {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+        .stat-box:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        .stat-box i {
+            font-size: 2.5rem;
+            color: var(--dark-green);
+            margin-bottom: 1rem;
+        }
+        .stat-box .number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--dark-green);
+            display: block;
+        }
+        .stat-box .label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Competencies Section */
+        .competencies-section {
+            padding: 80px 0;
+            background: white;
+        }
+        .competency-card {
+            background: var(--gray-light);
+            padding: 1.5rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .competency-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            background: white;
+        }
+        .competency-card i {
+            font-size: 2rem;
+            color: var(--dark-green);
+            margin-bottom: 1rem;
+        }
+        .competency-card h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark-green);
+            margin-bottom: 0.5rem;
+        }
+        .competency-card p {
+            color: var(--gray);
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        /* Skills Section */
+        .skills-section {
+            padding: 80px 0;
+            background: var(--gray-light);
+        }
+        .skill-category {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow-sm);
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+        .skill-category h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark-green);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--mint);
+        }
+        .skill-tag {
+            display: inline-block;
+            background: var(--mint);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--dark-green);
+            margin: 0.25rem;
+            transition: all 0.3s ease;
+        }
+        .skill-tag:hover {
+            transform: translateY(-3px);
+            background: var(--dark-green);
+            color: white;
+        }
+
+        /* Experience Timeline */
+        .experience-section {
+            padding: 80px 0;
+            background: white;
+        }
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--mint);
+        }
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+            padding-left: 2rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -0.5rem;
+            top: 0;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background: var(--dark-green);
+            border: 2px solid white;
+            box-shadow: 0 0 0 3px var(--mint);
+        }
+        .timeline-date {
+            font-size: 0.8rem;
+            color: var(--accent-green);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .timeline-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark-green);
+            margin-bottom: 0.25rem;
+        }
+        .timeline-subtitle {
+            color: var(--gray);
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+        .timeline-content {
+            background: var(--gray-light);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+        .timeline-content p {
+            color: var(--gray);
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--dark-green) 0%, var(--light-green) 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+        .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+        .cta-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .social-links a:hover {
+            color: var(--accent-green);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+            .stat-box {
+                margin-bottom: 1rem;
+            }
+            .timeline {
+                padding-left: 1rem;
+            }
+            .timeline-item {
+                padding-left: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">JK</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="text-center" data-aos="fade-up">
+                <h1>About Me</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">About</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-5" data-aos="fade-right">
+                    <div class="about-image-wrapper">
+                        <img src="assets/images/profile.jpg" alt="Joshua Karamuzi">
+                        <div class="about-badge">
+                            <i class="bi bi-person-check-fill"></i> IT Graduate 2026
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7" data-aos="fade-left">
+                    <h2 class="section-title">Building Solutions That Matter</h2>
+                    <div class="section-divider"></div>
+                    <p class="about-text">I'm an Information Technology student at Africa Renewal University, graduating in 2026. I don't just write code—I ask <strong>"What problem are we solving?"</strong> before writing a single line.</p>
+                    <p class="about-text">During my internship at Stratcom Communication & Computer Solutions Ltd, I wasn't just repairing computers. I was learning how technology directly impacts business operations. Now I'm building projects that combine technical skills with leadership.</p>
+                    <p class="about-text">My goal? To grow into an executive role where I can drive digital transformation—not just maintain systems. I'm passionate about leveraging technology to solve real-world challenges and improve operational efficiency.</p>
+                    <div class="signature">
+                        <i class="bi bi-quote"></i> Code with purpose, lead with vision.
+                    </div>
+                    <div class="mt-4">
+                        <a href="assets/resume/Joshua_Karamuzi_Resume.pdf" download class="btn btn-custom-primary" style="background: var(--dark-green); color: white;">
+                            <i class="bi bi-download"></i> Download Resume (PDF)
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-box">
+                        <i class="bi bi-code-slash"></i>
+                        <span class="number">2+</span>
+                        <span class="label">Projects Completed</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-box">
+                        <i class="bi bi-briefcase"></i>
+                        <span class="number">1+</span>
+                        <span class="label">Years Experience</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-box">
+                        <i class="bi bi-cpu"></i>
+                        <span class="number">8+</span>
+                        <span class="label">Technologies</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="stat-box">
+                        <i class="bi bi-people"></i>
+                        <span class="number">5+</span>
+                        <span class="label">Happy Clients</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Competencies -->
+    <section class="competencies-section">
+        <div class="container">
+            <div class="text-center" data-aos="fade-up">
+                <h2 class="section-title">Core Competencies</h2>
+                <div class="section-divider" style="margin: 1rem auto;"></div>
+                <p class="text-muted mb-5">What makes me different as an IT professional</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="competency-card text-center">
+                        <i class="bi bi-people-fill"></i>
+                        <h4>Leadership & Team Collaboration</h4>
+                        <p>Leading projects and teams with clear communication and shared vision</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="competency-card text-center">
+                        <i class="bi bi-lightbulb-fill"></i>
+                        <h4>Strategic Thinking & Problem Solving</h4>
+                        <p>Finding innovative solutions to complex technical challenges</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="competency-card text-center">
+                        <i class="bi bi-kanban"></i>
+                        <h4>Project Management</h4>
+                        <p>From concept to deployment — managing timelines and deliverables</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="competency-card text-center">
+                        <i class="bi bi-diagram-3-fill"></i>
+                        <h4>Software Development Lifecycle (SDLC)</h4>
+                        <p>Following best practices from planning to maintenance</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="competency-card text-center">
+                        <i class="bi bi-graph-up"></i>
+                        <h4>Digital Innovation & Transformation</h4>
+                        <p>Leveraging technology to drive business growth</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="600">
+                    <div class="competency-card text-center">
+                        <i class="bi bi-chat-dots-fill"></i>
+                        <h4>Communication & Stakeholder Engagement</h4>
+                        <p>Bridging the gap between technical and non-technical audiences</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Skills -->
+    <section class="skills-section">
+        <div class="container">
+            <div class="text-center" data-aos="fade-up">
+                <h2 class="section-title">Technical Skills</h2>
+                <div class="section-divider" style="margin: 1rem auto;"></div>
+                <p class="text-muted mb-5">Technologies I work with daily</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="skill-category">
+                        <h3><i class="bi bi-file-code"></i> Languages</h3>
+                        <div>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">C++</span>
+                            <span class="skill-tag">PHP</span>
+                            <span class="skill-tag">HTML</span>
+                            <span class="skill-tag">CSS</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="skill-category">
+                        <h3><i class="bi bi-database"></i> Databases</h3>
+                        <div>
+                            <span class="skill-tag">MySQL</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="skill-category">
+                        <h3><i class="bi bi-tools"></i> Tools & DevOps</h3>
+                        <div>
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">VS Code</span>
+                            <span class="skill-tag">GitHub</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Timeline -->
+    <section class="experience-section">
+        <div class="container">
+            <div class="text-center" data-aos="fade-up">
+                <h2 class="section-title">Professional Journey</h2>
+                <div class="section-divider" style="margin: 1rem auto;"></div>
+                <p class="text-muted mb-5">My path in the IT industry</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="timeline">
+                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+                            <div class="timeline-date">2024 - Present</div>
+                            <div class="timeline-title">IT Intern</div>
+                            <div class="timeline-subtitle">Stratcom Communication & Computer Solutions Ltd</div>
+                            <div class="timeline-content">
+                                <p>Performed computer repair and maintenance, troubleshooting hardware and software issues. Provided technical support and system diagnostics. Designed graphics for clients and developed basic websites using HTML and CSS.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                            <div class="timeline-date">2022 - Present</div>
+                            <div class="timeline-title">Bachelor of Information Technology</div>
+                            <div class="timeline-subtitle">Africa Renewal University, Uganda</div>
+                            <div class="timeline-content">
+                                <p>Expected Graduation: 2026. Focus on software development, leadership, and digital transformation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content" data-aos="fade-up">
+                <h3 class="cta-title">Ready to Build Something Great?</h3>
+                <p class="mb-4 fs-5">I'm actively looking for opportunities starting 2026. Let's collaborate.</p>
+                <a href="contact.html" class="btn btn-light btn-lg px-5" style="color: var(--dark-green); font-weight: 600; border-radius: 50px;">
+                    Get In Touch <i class="bi bi-send"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://github.com/joshuaka12" target="_blank"><i class="bi bi-github"></i> GitHub</a>
+                <a href="https://linkedin.com/in/joshuakaramuzi" target="_blank"><i class="bi bi-linkedin"></i> LinkedIn</a>
+                <a href="mailto:karamuzijoshua@gmail.com"><i class="bi bi-envelope"></i> Email</a>
+            </div>
+            <p>&copy; 2026 Joshua Karamuzi. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Initialize AOS animations
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
